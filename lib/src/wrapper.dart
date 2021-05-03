@@ -81,13 +81,15 @@ class _FancyDrawerWrapperState extends State<FancyDrawerWrapper> {
         Container(
           width: double.infinity,
           height: double.infinity,
+          padding: widget.paddingItems ?? EdgeInsets.only(left: 8.0),
           color: widget.backgroundColor,
-          child: Padding(
-            padding: widget.paddingItems ?? EdgeInsets.only(left: 8.0),
+          child: Align(
+            alignment: Alignment.centerLeft,
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: widget.drawerItems.map((item) {
                   return Container(
                     margin: EdgeInsets.symmetric(vertical: widget.itemGap),
