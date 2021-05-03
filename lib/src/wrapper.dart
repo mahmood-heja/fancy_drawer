@@ -15,6 +15,7 @@ class FancyDrawerWrapper extends StatefulWidget {
   final List<Widget> drawerItems;
   final double itemGap;
   final Color backgroundColor;
+  final EdgeInsets paddingItems;
   final Widget child;
   final FancyDrawerController controller;
   final bool hideOnContentTap;
@@ -28,7 +29,7 @@ class FancyDrawerWrapper extends StatefulWidget {
     @required this.controller,
     this.itemGap = 10.0,
     this.hideOnContentTap = true,
-    this.cornerRadius = 8.0,
+    this.cornerRadius = 8.0, this.paddingItems,
   }) : super(key: key);
 
   @override
@@ -82,17 +83,18 @@ class _FancyDrawerWrapperState extends State<FancyDrawerWrapper> {
           height: double.infinity,
           color: widget.backgroundColor,
           child: Padding(
-            padding:
-                EdgeInsets.only(left: MediaQuery.of(context).size.width / 8),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: widget.drawerItems.map((item) {
-                return Container(
-                  margin: EdgeInsets.symmetric(vertical: widget.itemGap),
-                  child: item,
-                );
-              }).toList(),
+            padding: widget.paddingItems ?? EdgeInsets.only(left: 8.0),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: widget.drawerItems.map((item) {
+                  return Container(
+                    margin: EdgeInsets.symmetric(vertical: widget.itemGap),
+                    child: item,
+                  );
+                }).toList(),
+              ),
             ),
           ),
         ),
